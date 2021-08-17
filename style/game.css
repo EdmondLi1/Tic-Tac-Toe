@@ -1,0 +1,12 @@
+button {
+    font-size: 1.8rem;
+    padding: 1rem 0;
+    width: 20rem;
+    height: 20rem;
+    text-align: center;
+    border: 0.1rem solid #56A5EB;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    color: #56A5EB;
+    background-color: white;
+}
