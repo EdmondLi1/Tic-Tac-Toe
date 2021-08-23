@@ -3,7 +3,6 @@
 body {
     margin: 0;
     padding: 0;
-    /* color: var(--purple); */
     font-family: sans-serif;
 }
 
@@ -21,38 +20,41 @@ h2 {
 }
   
 #game-board{
-    margin-top: 40px;
     display: flex;
     flex-wrap: wrap;
+
+    margin-top: 40px;
     width: 450px;
 }
 
-
-/* teesting */ 
 .container.hide {
     opacity: 0;
     pointer-events: none;
 }
 
 .container {
-    padding: 40px;
-    height: 100vh;
-    width: 100vw;
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    height: 100vh;
+    width: 100vw;
     
-    /* exprtiementing */
+    padding: 40px;
+ 
     transition: all 0.3s ease;
 }
 
 .box {
-    height: 150px;
-    width: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    height: 150px;
+    width: 150px;
+  
     font-size: 150px;
 }
   
@@ -60,61 +62,57 @@ h2 {
     justify-content: center;
     align-items: center;
 
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 15%; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
     left: 0;
+
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 15%; /* Set the width of the sidebar */
+    
     background-color: #000000;
     background: linear-gradient(#000000 0%, #2c3e50 74%);
-    padding: 2.5vw;
     /* background: linear-gradient(black, #333 33%,  rgb(137, 113, 113)); Black */
-    overflow-x: hidden; /*Disable horizontal scroll */
+
+    padding: 2.5vw;
     padding-top: 20px;
     margin-right: 10vw;
+
+    overflow-x: hidden; /* disable scroll */
 }
 
 #sideBar h2{
-    justify-content: center;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .timer {
     margin: auto;
+
     display: flex;
-
     justify-content: center;
+    text-align: center;
     align-items: center; /* same as flex-direction: column; */  
-
-    /* position: fixed; */
-    /* left: 10%; */
 
     height: 10vw;
     width: 10vw;
-
     max-width: 100px;
     max-height: 100px;
 
-    padding: 0;
-    /* max-height: 150px;
+     /* max-height: 150px;
     max-width: 150px; */
 
-    border: 3px solid;
-    text-align: center;
-    justify-content: center;
-
-
+    padding: 0;
     /* play with this plz*/
-
+    color: #3e0249;
     font-family: Times;
     font-size: 2.5vw;
     border-color: #3e0249;
-    background-color: lightgrey;
-    color: #3e0249;
+    border: 3px solid;
     border-radius: 10px;
+    background-color: lightgrey;
 }
 
 .timer-title{

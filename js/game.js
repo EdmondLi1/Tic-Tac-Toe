@@ -174,7 +174,7 @@ const boxClicked = (e) => {
 
             setTimeout(() => {
                 displayEndScreen(currentPlayer, false)
-            }, 1000);
+            }, 300);
             
             
         } else if (checkDraw()) {
@@ -182,7 +182,7 @@ const boxClicked = (e) => {
 
             setTimeout(() => {
                 displayEndScreen(currentPlayer, true)
-            }, 1000);
+            }, 300);
             
         }
     }
@@ -258,10 +258,12 @@ clockTimer = () => {
 resetTimer = () => {
     clearInterval(timer);
     clockTime = 0;
+    // add noclickable attr to board
 
     //use this if laggy
     setTimeout(() => {
          timer = setInterval(clockTimer, 1000);
+         // make it clickable now
     }, 100);
     
     // timer = setInterval(clockTimer, 1000);
