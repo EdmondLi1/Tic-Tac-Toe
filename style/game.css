@@ -28,13 +28,13 @@ h2 {
 }
 
 
-/* teesting */
-.container.hide{
+/* teesting */ 
+.container.hide {
     opacity: 0;
     pointer-events: none;
 }
 
-.container{
+.container {
     padding: 40px;
     height: 100vh;
     width: 100vw;
@@ -56,35 +56,6 @@ h2 {
     font-size: 150px;
 }
   
-
-/* button {
-    font-size: 1.8rem;
-    padding: 1rem 0;
-    width: 20rem;
-    height: 20rem;
-    text-align: center;
-    border: 0.1rem solid #56A5EB;
-    margin-bottom: 1rem;
-    text-decoration: none;
-    color: #56A5EB;
-    background-color: white;
-}
-
-
-button:hover {
-    cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
-    transform: translateY(-0.1rem);
-    transition: transform 150ms;
-}
-
-button[disabled]:hover {
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
-} */
-
-
 #sideBar {
     justify-content: center;
     align-items: center;
@@ -102,9 +73,6 @@ button[disabled]:hover {
     overflow-x: hidden; /*Disable horizontal scroll */
     padding-top: 20px;
     margin-right: 10vw;
-
-
-
 }
 
 #sideBar h2{
@@ -153,5 +121,3 @@ button[disabled]:hover {
     margin-top: 2vw;
     margin-bottom: 0.5vw;
 }
-
-

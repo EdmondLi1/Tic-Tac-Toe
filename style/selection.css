@@ -1,5 +1,5 @@
 /*  Code credit to CodingNepal */
-*{
+* {
     margin:0;
     padding: 0;
     box-sizing: border-box;
@@ -19,6 +19,7 @@ body {
 body.hide {
     background-color: #fff;
 }
+
 .select-box {
     position: absolute;
     top: 50%;
@@ -78,5 +79,5 @@ body.hide {
 }
 
 .options button.playerO{
-    margin-left:5px;
+    margin-left: 5px;
 }
