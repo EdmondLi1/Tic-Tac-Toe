@@ -90,7 +90,7 @@ const displayEndScreen = (winner, draw) => {
     selectReplay.onclick = () => {
         setTimeout(() => {
             resultBox.classList.add('hide');
-            window.location.assign("testing.html");
+            window.location.assign("game.html");
         }, 300);
     };
 
