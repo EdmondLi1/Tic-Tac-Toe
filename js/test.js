@@ -86,6 +86,7 @@ const drawBoard = () => {
 const boxClicked = (e) => {
     let currentPlayer = playerText;
     const id = e.target.id;
+
     if (!boardState[id]) {
         console.log('you clicked me!');
         boardState[id] = currentPlayer;
@@ -94,12 +95,64 @@ const boxClicked = (e) => {
         playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
         e.target.innerText = currentPlayer;
 
-        console.log(playerText);
         playerText = currentPlayer === O_TURN ? X_TURN : O_TURN;
-        // resetTimer(timer);
-    }
-   
 
+        if (winnerAvailable(currentPlayer)) {
+            // add new result box, timeout and return back to home
+            console.log(`${currentPlayer} has won`);
+        } else if (checkDraw()) {
+            console.log('its a draw!');
+        }
+            
+        // console.log(boardState);
+    }
+}; 
+
+// Check if the player has won
+const winnerAvailable = (player) => {
+
+    for (var index = 0; index < 3; index++) {
+
+        // check rols
+        if (player == boardState[3 * index + 1]) {
+            if (boardState[3 * index] == player && player == boardState[3 * index + 2]) {
+                console.log('row win');
+                return true;
+            }
+
+        } 
+
+        // check col
+        if (player == boardState[index + 3]) {
+            if (boardState[index] == player && player == boardState[index + 6]) {
+                console.log('col win');
+                return true;    
+            }
+
+        }
+    }
+
+    if (player == boardState[4]) {
+        if (boardState[0] == player && player == boardState[8]) {
+            console.log('dia win');
+            return true;
+        }
+        if (boardState[6] == player && player == boardState[2]) {
+            console.log('dia win');
+            return true;
+        }
+    }     
+    return false;
+};
+
+
+const checkDraw = () => {
+    for (var index = 0; index < 9; index++) {
+        if(!boardState[index]) {
+            return false;
+        }
+    }
+    return true;
 };
 
 drawBoard();
