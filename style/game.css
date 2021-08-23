@@ -1,4 +1,63 @@
-button {
+/* CSS for the thing */
+
+body {
+    margin: 0;
+    padding: 0;
+    /* color: var(--purple); */
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 54px;
+}
+
+h2 {
+    font-size: 26px;
+    color: white;
+}
+
+* {
+    box-sizing: border-box;
+}
+  
+#game-board{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 450px;
+}
+
+
+/* teesting */
+.container.hide{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.container{
+    padding: 40px;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    /* exprtiementing */
+    transition: all 0.3s ease;
+}
+
+.box {
+    height: 150px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 150px;
+}
+  
+
+/* button {
     font-size: 1.8rem;
     padding: 1rem 0;
     width: 20rem;
@@ -10,3 +69,89 @@ button {
     color: #56A5EB;
     background-color: white;
 }
+
+
+button:hover {
+    cursor: pointer;
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+    transform: translateY(-0.1rem);
+    transition: transform 150ms;
+}
+
+button[disabled]:hover {
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+} */
+
+
+#sideBar {
+    justify-content: center;
+    align-items: center;
+
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 15%; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #000000;
+    background: linear-gradient(#000000 0%, #2c3e50 74%);
+    padding: 2.5vw;
+    /* background: linear-gradient(black, #333 33%,  rgb(137, 113, 113)); Black */
+    overflow-x: hidden; /*Disable horizontal scroll */
+    padding-top: 20px;
+    margin-right: 10vw;
+
+
+
+}
+
+#sideBar h2{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.timer {
+    margin: auto;
+    display: flex;
+
+    justify-content: center;
+    align-items: center; /* same as flex-direction: column; */  
+
+    /* position: fixed; */
+    /* left: 10%; */
+
+    height: 10vw;
+    width: 10vw;
+
+    max-width: 100px;
+    max-height: 100px;
+
+    padding: 0;
+    /* max-height: 150px;
+    max-width: 150px; */
+
+    border: 3px solid;
+    text-align: center;
+    justify-content: center;
+
+
+    /* play with this plz*/
+
+    font-family: Times;
+    font-size: 2.5vw;
+    border-color: #3e0249;
+    background-color: lightgrey;
+    color: #3e0249;
+    border-radius: 10px;
+}
+
+.timer-title{
+    margin-top: 2vw;
+    margin-bottom: 0.5vw;
+}
+
+
