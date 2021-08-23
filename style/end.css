@@ -1,7 +1,7 @@
 .result-box {
 
     justify-content: center;
-    
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -66,8 +66,4 @@
     border-radius: 10px;
     margin-top: 15px;
     padding: 10px;
-   
-
-
-    
 }
