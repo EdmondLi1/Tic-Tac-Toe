@@ -1,0 +1,78 @@
+.result-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 1s ease;
+
+
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+
+    /* idk about this */
+    max-width: 350px;
+    width: 100%;
+    justify-content: center;
+}
+
+.result-box.hide{
+    opacity: 0;
+    pointer-events: none;
+}
+
+.result-box #winning-text{
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.result-box p {
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+}
+
+.result-box .button{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.winstreak {
+    margin: auto;
+    display: flex;
+
+    justify-content: center;
+    align-items: center; /* same as flex-direction: column; */  
+
+    /* position: fixed; */
+    /* left: 10%; */
+
+    height: 4.2vh;
+    width: 4.2vw;
+
+    max-width: 100px;
+    max-height: 100px;
+
+    padding: 10px;
+    margin-top: 15px;
+    /* max-height: 150px;
+    max-width: 150px; */
+
+    border: 5px solid;
+    text-align: center;
+    justify-content: center;
+
+
+    /* play with this plz*/
+
+    font-family: Times;
+    font-size: 2.5vw;
+    border-color: #56BAED;
+    color: #3e0249;
+    border-radius: 10px;
+}
