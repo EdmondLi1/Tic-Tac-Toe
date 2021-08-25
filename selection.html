@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Gamemode selection </title>
+    <link rel="stylesheet" href="style/selection.css">
+</head>
+
+<body class="new-background">
+
+    <!-- add a transition here -->
+    <!-- Select Box Section -->
+    <div class="select-box gamemode">
+        <header> Tictactoe Gamemode </header>
+        <div class="content">
+            <div class="title"> Please select which gamemode you would like to play! </div>
+            <div class="options">
+                <button class="singlePlayer"> Single Player </button>
+                <button class="multiPlayer"> Multiplayer </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="select-box bot hide">
+        <header> Bot Selection </header>
+        <div class="content">
+            <div class="title"> Please select a bot preference </div>
+            <div class="options">
+                <button class="minMaxBot"> Min-Max Bot </button>
+                <button class="randomBot"> RNG Bot </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-section hide">
+        <button class="back"> Back </button>
+    </div>
+
+    <script src="js/selection.js"></script>
+</body>
+</html>
