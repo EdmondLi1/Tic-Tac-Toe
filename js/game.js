@@ -246,7 +246,8 @@ resetTimer = () => {
     setTimeout(() => {
          timer = setInterval(clockTimer, 1000);
          // make it clickable now
-    }, 100);    
+    }, 100);
+    
 };
 
 // Draw the board
