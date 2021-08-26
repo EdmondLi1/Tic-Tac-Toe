@@ -10,4 +10,4 @@ This is still work in progress!
 - Add a profile.html along side with the css
 - Try and figure a way to store usernames for other people's profiles
 - optimize some features in th code (rendering plyaer click and moves)
-- currently no bugs identified
+- currently no bugs identified (currently)
