@@ -101,21 +101,7 @@ const displayEndScreen = (winner, draw) => {
             window.location.assign("index.html");
         }, 300); 
     };
-
-    // if (idling()) {
-    //     setTimeout(() => {
-    //         resultBox.classList.add('hide');
-    //         window.location.assign("index.html");
-    //     }, 300);
-    // }
 };
-
-// impleemnted later
-// const idling = () => {
-
-//}
-
-
 
 // Draw the div boxes
 const drawBoard = () => {
@@ -192,9 +178,10 @@ const boxClicked = (e) => {
     }
 }; 
 
-// BOT LOL
+// Bot Move function
 const randomMove = (botPlayer) => {
-
+    // checks all available spots remaining on the current boardState
+    // chooeses a random index from the remaining spots
     let spots = [];
 
     for (var i = 0; i < boardState.length; i++){
@@ -205,6 +192,7 @@ const randomMove = (botPlayer) => {
 
     let randomIndex = Math.floor(Math.random() * spots.length);
 
+    // this seems redundant
     while (!boardState[spots[randomIndex]]) {
         randomSpot = Math.floor(Math.random() * spots.length);
         if (!boardState[spots[randomIndex]]) {break;}
@@ -237,13 +225,11 @@ const randomMove = (botPlayer) => {
     }
 
     playerText = playerText === O_TURN ? X_TURN : O_TURN;
-
 };
 
 // Check if the player has won
 const winnerAvailable = (player) => {
 
-    console.log(boardState);
     for (let index = 0; index < 3; index++) {
 
         // check rols [1, 4, 7]
@@ -298,7 +284,6 @@ const clockTimer = () => {
     clockTime++;
     timerText.innerHTML = clockTime;
 
-    // isWinner, winner = checkWinner();
     // Once timer reaches 10, changes player's turn
     if (clockTime == MAX_TIME  || playerChosen == true) {
         playerChosen = false;

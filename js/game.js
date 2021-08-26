@@ -229,7 +229,6 @@ clockTimer = () => {
     clockTime++;
     timerText.innerHTML = clockTime;
 
-    console.log(playerChosen);
     // Once timer reaches 10, changes player's turn
     if (clockTime == MAX_TIME  || playerChosen == true) {
         playerChosen = false;

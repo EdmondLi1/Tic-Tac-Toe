@@ -30,7 +30,7 @@ const MAX_TIME = 20;
 /* Global Variables */
 let realBotPlayer = undefined;
 let realPlayer = undefined;
-let playerTurn = Math.round(Math.random()); // make it 1 for now
+let playerTurn = Math.round(Math.random()); // make it randomized right now
 let currentPlayer;
 let playerText = undefined;
 let playerChosen = false;
@@ -53,6 +53,7 @@ window.onload = () => {
         realPlayer = X_TURN;
         realBotPlayer = O_TURN;
 
+        // to compensate code which made to set realPlayer to player '0'
         if (playerTurn == 1) {
             playerText = O_TURN;
             playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
@@ -65,6 +66,7 @@ window.onload = () => {
         realPlayer = O_TURN;
         realBotPlayer = X_TURN;
 
+        // to compensate code which made to set realPlayer to player '0'
         if (playerTurn == 1) {
             playerText = X_TURN;
             playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
@@ -84,7 +86,7 @@ const displayBoard = () => {
 
 
 const displayEndScreen = (winner, draw) => {
-    resetTimer();
+    clearInterval(timer);
 
     // Show the result-box
     resultBox.classList.remove('hide');
@@ -98,9 +100,6 @@ const displayEndScreen = (winner, draw) => {
     else {
         winningText.innerHTML = `There was a draw!`;
     }
-
-    // updating winstreak w/ database {WIP}
-    // <code here>
 
     // Events for clicking the buttons
     selectReplay.onclick = () => {
@@ -193,8 +192,6 @@ const boxClicked = (e) => {
     }
 }; 
 
-// minmax algorithm
-
 // BOT LOL
 function botMove() {
 
@@ -202,23 +199,21 @@ function botMove() {
     let bestScore = -Infinity;
     let bestMove;
 
-    // checking all possible moves (at current board)
+    // checking all possible moves (with current boardState)
     for (let index = 0; index < 9; index++) {
 
         if (!localBoardState[index]) {
             // try the spot
             localBoardState[index] = realBotPlayer;
-
             // check other players spot
             let score = minimax(localBoardState, 0, false);
-
             // rm spot
             localBoardState[index] = undefined;
 
+            // return the best score and spot
             if (score > bestScore) {
                 bestScore = score;
                 bestMove = index;
-                console.log(bestScore);
             }
         }
     } 
@@ -231,7 +226,7 @@ function botMove() {
         }
     });
 
-    // kepe this here
+    // change turns
     playerTurn = 1 - playerTurn;
     playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
 
@@ -254,26 +249,12 @@ function botMove() {
 };
 
 
-// let scoreList = {};
-
-// determins bot's score
-// if (realBotPlayer == X_TURN) {
-//     scoreList = {
-//         'X': 10,
-//         'O': -10
-//     };
-// } else {
-//     scoreList = {
-//         'X': -10,
-//         'O': 10
-//     };
-// }
-
+// heart of the bots brain; minmax algo
 function minimax(board, depth, isMaximizing) {
-    // scoreList = realBotPlayer === X_TURN ? 
-    // {'X': 10,'O': -10} : {'X': -10,'O': 10};
-    // wtf this?
-    
+    // recusively iterates possible boardStates and gives a ranking to which 
+    // move has the highest possibility of the bot winnign
+
+    // base (terminal) cases
     if (winnerAvailable(realBotPlayer)) {
         return 10;
     } 
@@ -284,10 +265,7 @@ function minimax(board, depth, isMaximizing) {
         return 0;
     }
 
-//     return 1;
-// }
-
-    // if we are maximizing this player
+    // if we are maximizing this player (bot in this case)
     if (isMaximizing) {
         let bestScore = -Infinity;
 
@@ -306,7 +284,7 @@ function minimax(board, depth, isMaximizing) {
         }
         return bestScore;
 
-    // find the worst score (for human player)
+    // find the worst score (for human player case)
     } else {
         let bestScore = Infinity;
 
@@ -395,12 +373,10 @@ const resetTimer = () => {
     clearInterval(timer);
     clockTime = 0;
     // add noclickable attr to board
+   
+    timer = setInterval(clockTimer, 1000);
+    // make it clickable now
 
-    //use this if laggy
-    setTimeout(() => {
-         timer = setInterval(clockTimer, 1000);
-         // make it clickable now
-    }, 100);    
 };
 
 // draw the board

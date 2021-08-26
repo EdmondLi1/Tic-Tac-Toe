@@ -14,15 +14,13 @@ const backButton = backSection.querySelector(".back");
 
 // Event handling
 singlePlayer.onclick = () => {
-
-    // transition and warp to game.html
     gamemode.classList.add("hide");
     bot.classList.remove("hide");
     backSection.classList.remove("hide");
 };
 
 multiPlayer.onclick = () => {
-    console.log("you choose multiplayer!");
+    // transition and warp to game.html
     setTimeout(() => {
         window.location.assign("game.html");
     }, 300);
@@ -42,9 +40,9 @@ minMaxBot.onclick = () => {
 };
 
 backButton.onclick = () => {
-    gamemode.classList.remove("hide");
-    bot.classList.add("hide");
-    backSection.classList.add("hide");
     // unhide selectbox 1
     // hide select box 2
+    backSection.classList.add("hide");
+    gamemode.classList.remove("hide");
+    bot.classList.add("hide");
 };
