@@ -8,7 +8,7 @@ const singlePlayer = gamemode.querySelector(".singlePlayer");
 const multiPlayer = gamemode.querySelector(".multiPlayer");
 
 // Section box 2
-const minMaxBot = bot.querySelector(".mixMaxBot");
+const minMaxBot = bot.querySelector(".minMaxBot");
 const randomBot = bot.querySelector(".randomBot");
 const backButton = backSection.querySelector(".back");
 
@@ -35,7 +35,11 @@ randomBot.onclick = () => {
     }, 300);
 };
 
-
+minMaxBot.onclick = () => {
+    setTimeout(() => {
+        window.location.assign("minmaxbot.html");
+    }, 300);
+};
 
 backButton.onclick = () => {
     gamemode.classList.remove("hide");

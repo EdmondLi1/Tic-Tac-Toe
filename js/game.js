@@ -7,8 +7,6 @@ const content = document.querySelector('.container');
 const selectBox = document.querySelector('.select-box');
 const resultBox = document.querySelector(".result-box");
 
-console.log(resultBox);
-
 // Buttons
 const selectPlayerX = selectBox.querySelector('.playerX');
 const selectPlayerO = selectBox.querySelector('.playerO');
@@ -100,20 +98,7 @@ const displayEndScreen = (winner, draw) => {
             window.location.assign("index.html");
         }, 300); 
     };
-
-    // if (idling()) {
-    //     setTimeout(() => {
-    //         resultBox.classList.add('hide');
-    //         window.location.assign("index.html");
-    //     }, 300);
-    // }
 };
-
-// impleemnted later
-// const idling = () => {
-
-//}
-
 
 
 // Draw the div boxes
@@ -145,7 +130,7 @@ const drawBoard = () => {
         box.style = styleAdd;
         box.addEventListener("click", boxClicked);
     });
-}
+};
 
 // Clicking on board
 const boxClicked = (e) => {
@@ -238,16 +223,13 @@ const checkDraw = () => {
     return true;
 };
 
-drawBoard();
-
 // Clock and Game loop
 clockTimer = () => {
-    // console.log('tesitng');
+
     clockTime++;
     timerText.innerHTML = clockTime;
 
     console.log(playerChosen);
-    // isWinner, winner = checkWinner();
     // Once timer reaches 10, changes player's turn
     if (clockTime == MAX_TIME  || playerChosen == true) {
         playerChosen = false;
@@ -266,9 +248,7 @@ resetTimer = () => {
          // make it clickable now
     }, 100);
     
-    // timer = setInterval(clockTimer, 1000);
 };
 
-// randomSpot = () => {
-    
-// };
+// Draw the board
+drawBoard();

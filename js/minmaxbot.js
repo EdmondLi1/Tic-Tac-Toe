@@ -28,7 +28,9 @@ const X_TURN = 'X';
 const MAX_TIME = 20;
 
 /* Global Variables */
-let playerTurn = 0;
+let realBotPlayer = undefined;
+let realPlayer = undefined;
+let playerTurn = Math.round(Math.random()); // make it 1 for now
 let currentPlayer;
 let playerText = undefined;
 let playerChosen = false;
@@ -48,13 +50,27 @@ for (let i = 0; i < boardState.length; i++) {
 window.onload = () => {
     selectPlayerX.onclick = () => {
         playerText = X_TURN;
+        realPlayer = X_TURN;
+        realBotPlayer = O_TURN;
+
+        if (playerTurn == 1) {
+            playerText = O_TURN;
+            playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
+        }
         displayBoard();
-    }
+    };
 
     selectPlayerO.onclick = () => {
         playerText = O_TURN;
+        realPlayer = O_TURN;
+        realBotPlayer = X_TURN;
+
+        if (playerTurn == 1) {
+            playerText = X_TURN;
+            playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
+        }
         displayBoard();
-    }
+    };
 };
 
 
@@ -76,7 +92,6 @@ const displayEndScreen = (winner, draw) => {
     body.classList.remove('hide');
     body.classList.add('new-background');
 
-
     if (!draw){
         winningText.innerHTML = `Player ${winner} has won!`;
     }
@@ -91,7 +106,7 @@ const displayEndScreen = (winner, draw) => {
     selectReplay.onclick = () => {
         setTimeout(() => {
             resultBox.classList.add('hide');
-            window.location.assign("singleplayer.html");
+            window.location.assign("minmaxbot.html");
         }, 300);
     };
 
@@ -101,21 +116,7 @@ const displayEndScreen = (winner, draw) => {
             window.location.assign("index.html");
         }, 300); 
     };
-
-    // if (idling()) {
-    //     setTimeout(() => {
-    //         resultBox.classList.add('hide');
-    //         window.location.assign("index.html");
-    //     }, 300);
-    // }
 };
-
-// impleemnted later
-// const idling = () => {
-
-//}
-
-
 
 // Draw the div boxes
 const drawBoard = () => {
@@ -192,87 +193,167 @@ const boxClicked = (e) => {
     }
 }; 
 
+// minmax algorithm
+
 // BOT LOL
-const randomMove = (botPlayer) => {
+function botMove() {
 
-    let spots = [];
+    let localBoardState = boardState;
+    let bestScore = -Infinity;
+    let bestMove;
 
-    for (var i = 0; i < boardState.length; i++){
-        if (!boardState[i]){
-            spots.push(i);
+    // checking all possible moves (at current board)
+    for (let index = 0; index < 9; index++) {
+
+        if (!localBoardState[index]) {
+            // try the spot
+            localBoardState[index] = realBotPlayer;
+
+            // check other players spot
+            let score = minimax(localBoardState, 0, false);
+
+            // rm spot
+            localBoardState[index] = undefined;
+
+            if (score > bestScore) {
+                bestScore = score;
+                bestMove = index;
+                console.log(bestScore);
+            }
         }
-    }
+    } 
 
-    let randomIndex = Math.floor(Math.random() * spots.length);
-
-    while (!boardState[spots[randomIndex]]) {
-        randomSpot = Math.floor(Math.random() * spots.length);
-        if (!boardState[spots[randomIndex]]) {break;}
-    }
-
+    // optimize this
     allBox.forEach((box, index) => {
-        if (index == spots[randomIndex]) {
-            box.innerText = botPlayer;
-            boardState[index] = botPlayer;
+        if (index == bestMove) {
+            box.innerText = realBotPlayer;
+            boardState[bestMove] = realBotPlayer;
         }
     });
 
+    // kepe this here
     playerTurn = 1 - playerTurn;
     playerTurnText.innerHTML = `Turn: Player ${playerTurn + 1}`
 
-    if (winnerAvailable(botPlayer)) {
+    if (winnerAvailable(realBotPlayer)) {
         // add new result box, timeout and return back to home
-        console.log(`${botPlayer} has won`);
+        console.log(`${realBotPlayer} has won`);
 
         setTimeout(() => {
-            displayEndScreen(botPlayer, false)
+            displayEndScreen(realBotPlayer, false)
         }, 300);
 
     } else if (checkDraw()) {
         console.log('its a draw!');
 
         setTimeout(() => {
-            displayEndScreen(botPlayer, true)
+            displayEndScreen(realBotPlayer, true)
         }, 300);
     }
-
     playerText = playerText === O_TURN ? X_TURN : O_TURN;
-
 };
+
+
+// let scoreList = {};
+
+// determins bot's score
+// if (realBotPlayer == X_TURN) {
+//     scoreList = {
+//         'X': 10,
+//         'O': -10
+//     };
+// } else {
+//     scoreList = {
+//         'X': -10,
+//         'O': 10
+//     };
+// }
+
+function minimax(board, depth, isMaximizing) {
+    // scoreList = realBotPlayer === X_TURN ? 
+    // {'X': 10,'O': -10} : {'X': -10,'O': 10};
+    // wtf this?
+    
+    if (winnerAvailable(realBotPlayer)) {
+        return 10;
+    } 
+    else if (winnerAvailable(realPlayer)) {
+        return -10;
+    }
+    else if (checkDraw()) {
+        return 0;
+    }
+
+//     return 1;
+// }
+
+    // if we are maximizing this player
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+
+        for (let index = 0; index < 9; index++) {
+            if (!board[index]) {
+                // try the spot
+                board[index] = realBotPlayer;
+                
+                // reverse find worst spot for player
+                let score = minimax(board, depth + 1, false);
+                // rm spot
+                board[index] = undefined;
+    
+                bestScore = Math.max(score, bestScore);
+            }   
+        }
+        return bestScore;
+
+    // find the worst score (for human player)
+    } else {
+        let bestScore = Infinity;
+
+        for (let index = 0; index < 9; index++) {
+            if (!board[index]) {
+                // try the spot
+                board[index] = realPlayer;
+
+                // reverse, find the best score for bot
+                let score = minimax(board, depth + 1, true);
+    
+                // rm spot
+                board[index] = undefined;
+    
+                bestScore = Math.min(score, bestScore);
+            }   
+        }
+        return bestScore;
+    }
+}
 
 // Check if the player has won
 const winnerAvailable = (player) => {
 
-    console.log(boardState);
     for (let index = 0; index < 3; index++) {
 
         // check rols [1, 4, 7]
         if (player == boardState[3 * index + 1]) {
             if (boardState[3 * index] == player && player == boardState[3 * index + 2]) {
-                console.log('row win');
                 return true;
             }
-
         } 
 
         // check col [3, 4, 5]
         if (player == boardState[index + 3]) {
             if (boardState[index] == player && player == boardState[index + 6]) {
-                console.log('col win');
                 return true;    
             }
-
         }
     }
 
     // check diagonals
     if (player == boardState[4]) {
         if (boardState[0] == player && player == boardState[8]) {
-            console.log('dia win');
             return true;
         }
         if (boardState[6] == player && player == boardState[2]) {
-            console.log('dia win');
             return true;
         }
     }     
@@ -284,13 +365,12 @@ const checkDraw = () => {
     for (let index = 0; index < 9; index++) {
 
         // checks if any empty boxes;
-        if(!boardState[index]) {
+        if (!boardState[index]) {
             return false;
         }
     }
     return true;
 };
-
 
 // Clock and Game loop
 const clockTimer = () => {
@@ -306,7 +386,8 @@ const clockTimer = () => {
     }
 
     if (playerTurn == 1) {
-        randomMove(playerText);
+        botMove();
+        resetTimer();
     }
 };
 
@@ -319,7 +400,8 @@ const resetTimer = () => {
     setTimeout(() => {
          timer = setInterval(clockTimer, 1000);
          // make it clickable now
-    }, 100);
+    }, 100);    
 };
 
+// draw the board
 drawBoard();
