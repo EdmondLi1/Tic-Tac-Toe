@@ -1,8 +1,9 @@
 :root {
-    background-color: #ECF5FF;
+    background: linear-gradient(to right, #74ebd5, #acb6e5);;
     font-size: 62.5%;
 
 }
+
 
 * {
     box-sizing: border-box;
@@ -21,7 +22,8 @@ h4 {
 
 h1 {
     font-size: 3.5vw;
-    color: #56A5EB;
+    font-weight: 700;
+    color: #fff;
     margin-bottom: 5rem;
 }
 
@@ -91,15 +93,18 @@ h3 {
 
 /* Button CSS */
 .button {
+    font-weight: 400;
     font-size: 1.8rem;
     padding: 1rem 0;
     width: 20rem;
     text-align: center;
     border: 0.1rem solid #56A5EB;
     margin-bottom: 1rem;
+    border-radius: 10px;
     text-decoration: none;
-    color: #56A5EB;
+    color: #3e0249;
     background-color: white;
+    border: none;
 }
 
 .button:hover {
